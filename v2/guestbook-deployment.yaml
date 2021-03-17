@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: guestbook
-        image: guestbook-example
+        image: guestbookv2
         resources:
           requests:
             cpu: 100m
