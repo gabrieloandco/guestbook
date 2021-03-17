@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: guestbook
+  name: guestbookv1
   labels:
-    app: guestbook
+    app: guestbookv1
 spec:
   ports:
   - port: 3000
     targetPort: http-server
   selector:
-    app: guestbook
+    app: guestbookv1
   type: LoadBalancer

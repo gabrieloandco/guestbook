@@ -15,28 +15,6 @@
   },
   "objects": [
     {
-      "kind": "Service",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "guestbookv1",
-        "annotations": {
-          "description": "Exposes and load balances the application pods"
-        }
-      },
-      "spec": {
-        "ports": [
-          {
-            "name": "web",
-            "port": 8080,
-            "targetPort": 8080
-          }
-        ],
-        "selector": {
-          "name": "guestbookv1"
-        }
-      }
-    },
-    {
       "kind": "Route",
       "apiVersion": "v1",
       "metadata": {
@@ -97,68 +75,7 @@
               "secret": "${GITHUB_WEBHOOK_SECRET}"
             }
           }
-        ],
-        "postCommit": {
-          "script": "go test -v ./..."
-        }
-      }
-    },
-    {
-      "kind": "DeploymentConfig",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "guestbookv1",
-        "annotations": {
-          "description": "Defines how to deploy the application server"
-        }
-      },
-      "spec": {
-        "strategy": {
-          "type": "Recreate"
-        },
-        "triggers": [
-          {
-            "type": "ImageChange",
-            "imageChangeParams": {
-              "automatic": true,
-              "containerNames": [
-                "guestbookv1"
-              ],
-              "from": {
-                "kind": "ImageStreamTag",
-                "name": "guestbookv1:latest"
-              }
-            }
-          },
-          {
-            "type": "ConfigChange"
-          }
-        ],
-        "replicas": 1,
-        "selector": {
-          "name": "guestbookv1"
-        },
-        "template": {
-          "metadata": {
-            "name": "guestbookv1",
-            "labels": {
-              "name": "guestbookv1"
-            }
-          },
-          "spec": {
-            "containers": [
-              {
-                "name": "guestbookv1",
-                "image": "guestbookv1",
-                "ports": [
-                  {
-                    "containerPort": 8080
-                  }
-                ]
-              }
-            ]
-          }
-        }
+        ]
       }
     }
   ],
