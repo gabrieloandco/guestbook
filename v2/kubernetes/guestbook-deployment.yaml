@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guestbookv1
+  labels:
+    app: guestbookv1
+    version: "1.0"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: guestbookv1
+  template:
+    metadata:
+      labels:
+        app: guestbookv1
+        version: "1.0"
+    spec:
+      containers:
+      - name: guestbookv1
+        image: guestbookv1:latest
+        ports:
+        - name: http-server
+          containerPort: 3000
